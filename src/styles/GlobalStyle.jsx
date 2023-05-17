@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-import useTheme from "../hooks/useTheme";
 
 const GlobalStyle = createGlobalStyle`
   body {
