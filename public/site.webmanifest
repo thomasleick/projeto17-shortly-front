@@ -1,0 +1,14 @@
+{
+  "name": "Shortly",
+  "short_name": "Shortly",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "204x204",
+      "type": "image/ico"
+    }
+  ],
+  "theme_color": "#5d9040ff",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}
