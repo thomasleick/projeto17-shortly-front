@@ -1,7 +1,7 @@
 import React from "react";
 
-const Root = () => {
+const Ranking = () => {
   return <div></div>;
 };
 
-export default Root;
+export default Ranking;

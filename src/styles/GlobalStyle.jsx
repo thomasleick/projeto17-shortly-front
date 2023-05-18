@@ -11,7 +11,8 @@ const GlobalStyle = createGlobalStyle`
     * {
       margin: 10px;
     }
-    input {
+  }
+  input {
       width: 769px;
       height: 60px;
       text-indent: 22px;
@@ -74,7 +75,6 @@ const GlobalStyle = createGlobalStyle`
       border: 2px solid rgba(120, 177, 89, 0.5);
       outline: none;
     }
-  }
 `;
 
 export default GlobalStyle;

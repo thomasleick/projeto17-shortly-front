@@ -30,7 +30,6 @@ const LogoContainer = styled.div`
   align-items: center;
 
   h1 {
-    font-family: "Lexend Deca";
     font-style: normal;
     font-weight: 200;
     font-size: 64px;

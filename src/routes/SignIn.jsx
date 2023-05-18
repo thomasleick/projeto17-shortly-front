@@ -54,7 +54,7 @@ const SignUp = () => {
         email: response.data.email,
         accessToken: response.data.accessToken,
       });
-      navigate("/", { replace: true });
+      navigate("/home", { replace: true });
     } catch (err) {
       console.log(err);
       if (!err?.response) {
