@@ -41,8 +41,8 @@ const Ranking = () => {
           <CustomSkeleton count={6} width="calc(100% - 50px)" />
         </SkeletonContainer>
       )}
-      {!isLoading && !ranking && <p>Sem dados para exibir...</p>}
-      {!isLoading && ranking && (
+      {!isLoading && !ranking?.length && <p>Sem dados para exibir...</p>}
+      {!isLoading && ranking.length && (
         <RankingContainer>
           {ranking.map((user, key) => (
             <RankItem key={key} data={user} pos={key + 1} />
