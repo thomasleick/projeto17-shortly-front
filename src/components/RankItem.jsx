@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const RankItem = (props) => {
-  const { id, name, linksCount, visitCount } = props.data;
+  const { name, linksCount, visitCount } = props.data;
   const { pos } = props;
   return (
     <Container>

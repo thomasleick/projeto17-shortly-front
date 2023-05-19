@@ -3,10 +3,13 @@ import styled from "styled-components";
 import { axiosPrivate } from "../api/axios";
 import trophy from "../assets/trophy.svg";
 import RankItem from "../components/RankItem";
+import useAuth from "../hooks/useAuth";
 
 const Ranking = () => {
   const [ranking, setRanking] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const { auth } = useAuth();
 
   const getRanking = async () => {
     const result = await axiosPrivate.get("/ranking", {});
@@ -35,11 +38,11 @@ const Ranking = () => {
       {!isLoading && ranking && (
         <RankingContainer>
           {ranking.map((user, key) => (
-            <RankItem key={key} data={user} pos={key+1}/>
+            <RankItem key={key} data={user} pos={key + 1} />
           ))}
-          
         </RankingContainer>
       )}
+      {!auth && <P>Crie sua conta para usar nosso serviço!</P>}
     </Main>
   );
 };
@@ -77,4 +80,13 @@ const RankingContainer = styled.section`
   border: 1px solid rgba(120, 177, 89, 0.25);
   box-shadow: 0px 4px 24px rgba(120, 177, 89, 0.12);
   border-radius: 24px 24px 0px 0px;
+`;
+
+const P = styled.p`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 45px;
+  color: #000000;
+  margin-top: 82px;
 `;
