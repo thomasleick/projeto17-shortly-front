@@ -3,11 +3,13 @@ import styled from "styled-components";
 import ShortLink from "../components/ShortLink";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import ErrWrapper from "../components/Err";
+import { ThreeDots } from "react-loader-spinner";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Home = () => {
   const [url, setUrl] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const [clearErrMsg, setClearErrMsg] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [userInfo, setUserInfo] = useState([]);
   const urlRef = useRef();
@@ -40,16 +42,23 @@ const Home = () => {
       /^([a-z0-9\.\-]*:\/?\/?)?(([a-z0-9\-]+\.)+[a-z]{2,}|localhost|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})(:\d+)?(\/[^\s]*)?$/i;
     return regex.test(uri);
   };
+
   const handleShortenLink = async (event) => {
     event.preventDefault();
 
     if (!validateUri(url)) {
       return setErrMsg("Link inválido");
     }
-
-    await axiosPrivate.post("/urls/shorten", { url });
-    await requestUserData();
-    setUrl("");
+    setIsLoading(true);
+    try {
+      await axiosPrivate.post("/urls/shorten", { url });
+      await requestUserData();
+      setUrl("");
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -68,12 +77,32 @@ const Home = () => {
           onChange={(e) => setUrl(e.target.value)}
           placeholder="Links que cabem no seu bolso"
           ref={urlRef}
+          disabled={isLoading}
         />
-        <button onClick={handleShortenLink}>
-          <span>Encurtar link</span>
+        <button onClick={handleShortenLink} disabled={isLoading}>
+          {isLoading ? (
+            <Span>
+              <ThreeDots
+                height="60"
+                width="80"
+                radius="15"
+                color="#5d9040ff"
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{}}
+                wrapperClassName=""
+                visible={true}
+              />
+            </Span>
+          ) : (
+            <span>Encurtar link</span>
+          )}
         </button>
       </Container>
-      {isLoading && <p>Carregando...</p>}
+      {isLoading && (
+        <SkeletonContainer>
+          <CustomSkeleton count={4} height="60px" />
+        </SkeletonContainer>
+      )}
       {!isLoading && !userInfo?.shortenedUrls && <p>Sem Links Cadastrados</p>}
       {!isLoading &&
         userInfo?.shortenedUrls &&
@@ -90,10 +119,12 @@ const Main = styled.main`
   justify-content: center;
   align-items: center;
 `;
+
 const Container = styled.div`
   margin-bottom: 38px;
+  display: flex;
 
-  * {
+  & > * {
     margin: 0 35px;
   }
 
@@ -106,4 +137,23 @@ const Container = styled.div`
     color: #ffffff;
   }
 `;
+
+const SkeletonContainer = styled.div`
+  margin-top: 20px;
+  width: 1021px;
+`;
+
+const CustomSkeleton = styled(Skeleton)`
+  margin-bottom: 42px;
+  border-radius: 12px;
+  background: linear-gradient(to right, #80cc7444 80%, #f5f5f5ff 20%);
+`;
+
+const Span = styled.span`
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export default Home;

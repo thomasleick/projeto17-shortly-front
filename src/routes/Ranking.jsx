@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { axiosPrivate } from "../api/axios";
 import trophy from "../assets/trophy.svg";
 import RankItem from "../components/RankItem";
 import useAuth from "../hooks/useAuth";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Ranking = () => {
   const [ranking, setRanking] = useState([]);
@@ -33,7 +35,12 @@ const Ranking = () => {
         <img src={trophy} alt="Ranking" />
         <H1>Ranking</H1>
       </Vertical>
-      {isLoading && <p>Carregando...</p>}
+      {isLoading && (
+        <SkeletonContainer>
+          {/* Skeleton loading elements */}
+          <CustomSkeleton count={6} width="calc(100% - 50px)" />
+        </SkeletonContainer>
+      )}
       {!isLoading && !ranking && <p>Sem dados para exibir...</p>}
       {!isLoading && ranking && (
         <RankingContainer>
@@ -63,12 +70,30 @@ const Vertical = styled.div`
     margin: 0 5px;
   }
 `;
+
 const H1 = styled.h1`
   font-style: normal;
   font-weight: 700;
   font-size: 36px;
   line-height: 45px;
   color: #000000;
+`;
+
+const SkeletonContainer = styled.section`
+  margin-top: 57px;
+  padding: 12.5px 0;
+  width: 1017px;
+  min-height: 216px;
+  background: #f2f2f2;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 24px 24px 0px 0px;
+`;
+
+const CustomSkeleton = styled(Skeleton)`
+  margin: 10px 25px;
+  ${({ width }) => width && css`
+    width: calc(${width} - 20px);
+  `}
 `;
 
 const RankingContainer = styled.section`
