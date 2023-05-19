@@ -1,17 +1,45 @@
 import React from "react";
 import styled from "styled-components";
 import deleteIcon from "../assets/delete.svg";
+import { axiosPrivate } from "../api/axios";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
-const ShortLink = () => {
+const ShortLink = (props) => {
+  const { id, shortUrl, url, visitCount } = props.data;
+  const { reload } = props;
+  const axiosPrivateDelete = useAxiosPrivate();
+
+  const handleClick = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axiosPrivate.get(`/urls/open/${shortUrl}`);
+      if (response.status === 200) {
+        window.location.href = url;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    try {
+      await axiosPrivateDelete.delete(`/urls/${id}`);
+      await reload();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <ShortLinkContainer>
-      <Left>
-        <p>Teste 1</p>
-        <p>Teste 2</p>
-        <p>Teste 3</p>
+      <Left onClick={handleClick}>
+        <P1>{url}</P1>
+        <P2>{shortUrl}</P2>
+        <P3>Quantidade de visitantes: {visitCount}</P3>
       </Left>
       <Right>
-        <img src={deleteIcon} alt="Excluir" />
+        <img src={deleteIcon} alt="Excluir" onClick={handleDelete} />
       </Right>
     </ShortLinkContainer>
   );
@@ -34,9 +62,9 @@ const Left = styled.div`
   height: 100%;
   margin-left: 21px;
   margin-right: 94px;
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
 
   p {
     font-style: normal;
@@ -44,6 +72,11 @@ const Left = styled.div`
     font-size: 14px;
     line-height: 18px;
     color: #ffffff;
+    position: absolute;
+    max-width: 260px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 `;
 const Right = styled.div`
@@ -56,6 +89,18 @@ const Right = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const P1 = styled.p`
+  left: 0;
+`;
+
+const P2 = styled.p`
+  left: 50%;
+`;
+
+const P3 = styled.p`
+  right: 0;
 `;
 
 export default ShortLink;

@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
       height: 60px;
       text-indent: 22px;
       background: #ffffff;
-      border: 1px solid rgba(120, 177, 89, 0.25);
+      border: 2px solid rgba(120, 177, 89, 0.25);
       box-shadow: 0px 4px 24px rgba(120, 177, 89, 0.12);
       border-radius: 12px;
 

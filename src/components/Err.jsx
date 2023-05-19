@@ -14,7 +14,7 @@ const Err = styled.p`
           font-weight: bold;
           font-size: 22px;
           position: absolute;
-          width: 769px;
+          width: ${(props) => (props?.width ? props.width : "769px")};
           height: 36px;
           top: ${(props) => (props?.posTop ? props.posTop : "55px")};
           left: ${(props) =>
@@ -30,7 +30,7 @@ const Err = styled.p`
           font-weight: bold;
           font-size: 22px;
           position: absolute;
-          width: 769px;
+          width: ${(props) => (props?.width ? props.width : "769px")};
           height: 36px;
           top: ${(props) => (props?.posTop ? props.posTop : "55px")};
           left: ${(props) =>
@@ -42,12 +42,13 @@ const Err = styled.p`
         `}
 `;
 
-export const ErrWrapper = ({ children, status, posLeft, posTop }) => {
+export const ErrWrapper = ({ children, status, posLeft, posTop, width }) => {
   return (
     <Err
       status={status}
       posLeft={posLeft}
       posTop={posTop}
+      width={width}
       aria-live="assertive"
     >
       {children}
