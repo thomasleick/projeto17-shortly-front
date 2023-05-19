@@ -15,11 +15,11 @@ export default function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Ranking />} />
           <Route element={<RequireAuth />}>
-          <Route path="/home" element={<Home />} />
+            <Route path="/home" element={<Home />} />
           </Route>
           <Route element={<RedirectIfAuth />}>
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
           </Route>
         </Route>
       </Route>

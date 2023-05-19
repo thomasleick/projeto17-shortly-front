@@ -8,7 +8,7 @@ const Home = () => {
   const [url, setUrl] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [clearErrMsg, setClearErrMsg] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [userInfo, setUserInfo] = useState([]);
   const urlRef = useRef();
   const errRef = useRef();
