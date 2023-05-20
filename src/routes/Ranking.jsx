@@ -19,6 +19,7 @@ const Ranking = () => {
       const result = await axiosPrivate.get("/ranking", {});
       setRanking(result.data);
       console.log(result.data)
+      console.log(import.meta.env.VITE_APP_API_URL);
     } catch (error) {
       console.log(error);
       // Handle the error (e.g., show an error message)
