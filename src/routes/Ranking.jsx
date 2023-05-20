@@ -14,24 +14,21 @@ const Ranking = () => {
   const { auth } = useAuth();
 
   const getRanking = async () => {
+    setIsLoading(true);
     try {
       const result = await axiosPrivate.get("/ranking", {});
       setRanking(result.data);
+      console.log(result.data)
     } catch (error) {
       console.log(error);
       // Handle the error (e.g., show an error message)
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    setIsLoading(true);
-    try {
-      getRanking();
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
+    getRanking();
   }, []);
 
   return (
@@ -96,9 +93,11 @@ const SkeletonContainer = styled.section`
 
 const CustomSkeleton = styled(Skeleton)`
   margin: 10px 25px;
-  ${({ width }) => width && css`
-    width: calc(${width} - 20px);
-  `}
+  ${({ width }) =>
+    width &&
+    css`
+      width: calc(${width} - 20px);
+    `}
 `;
 
 const RankingContainer = styled.section`
