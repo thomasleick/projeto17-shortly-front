@@ -14,8 +14,13 @@ const Ranking = () => {
   const { auth } = useAuth();
 
   const getRanking = async () => {
-    const result = await axiosPrivate.get("/ranking", {});
-    setRanking(result.data);
+    try {
+      const result = await axiosPrivate.get("/ranking", {});
+      setRanking(result.data);
+    } catch (error) {
+      console.log(error);
+      // Handle the error (e.g., show an error message)
+    }
   };
 
   useEffect(() => {
