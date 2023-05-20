@@ -146,7 +146,7 @@ const SkeletonContainer = styled.div`
 const CustomSkeleton = styled(Skeleton)`
   margin-bottom: 42px;
   border-radius: 12px;
-  background: linear-gradient(to right, #80cc7444 80%, #f5f5f5ff 20%);
+  background: linear-gradient(to right, #80cc7444 85.651%, #f5f5f5ff 14.349%);
 `;
 
 const Span = styled.span`
