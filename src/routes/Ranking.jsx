@@ -43,16 +43,16 @@ const Ranking = () => {
           <CustomSkeleton count={6} width="calc(100% - 50px)" />
         </SkeletonContainer>
       )}
-      <RankingContainer>
-      {!isLoading && !ranking?.length && <p>Sem dados para exibir...</p>}
+      
+      {!isLoading && !ranking?.length && <RankingContainer><P>Sem dados para exibir...</P></RankingContainer>}
       {!isLoading && ranking.length && (
-        <>
+        <RankingContainer>
           {ranking?.map((user, key) => (
             <RankItem key={key} data={user} pos={key + 1} />
           ))}
-        </>
+        </RankingContainer>
       )}
-      </RankingContainer>
+      
       {!auth && <P>Crie sua conta para usar nosso serviço!</P>}
     </Main>
   );
