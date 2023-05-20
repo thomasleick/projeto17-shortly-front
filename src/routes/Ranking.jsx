@@ -44,7 +44,7 @@ const Ranking = () => {
         </SkeletonContainer>
       )}
       
-      {!isLoading && !ranking?.length && <RankingContainer><P>Sem dados para exibir...</P></RankingContainer>}
+      {!isLoading && !ranking?.length && <RankingContainer><span><P>Sem dados para exibir...</P></span></RankingContainer>}
       {!isLoading && ranking.length && (
         <RankingContainer>
           {ranking?.map((user, key) => (
@@ -111,6 +111,12 @@ const RankingContainer = styled.section`
   border: 1px solid rgba(120, 177, 89, 0.25);
   box-shadow: 0px 4px 24px rgba(120, 177, 89, 0.12);
   border-radius: 24px 24px 0px 0px;
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const P = styled.p`
