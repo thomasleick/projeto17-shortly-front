@@ -25,7 +25,6 @@ const Ranking = () => {
       // Handle the error (e.g., show an error message)
     } finally {
       setIsLoading(false);
-      console.log(import.meta.env.VITE_APP_API_URL);
     }
   };
 
