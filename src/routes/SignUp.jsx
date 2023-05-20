@@ -57,7 +57,7 @@ const SignUp = () => {
       setIsLoading(true);
       await axiosPrivate.post("/auth/signup", body);
 
-      navigate("/login", { replace: true });
+      navigate("/signin", { replace: true });
     } catch (err) {
       console.log(err);
       if (!err?.response) {
