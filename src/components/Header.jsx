@@ -2,12 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import shortly from "../assets/shortly.svg";
 import Nav from "./Nav";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate("/");
+  };
+
   return (
     <HeaderContainer>
       <Nav />
-      <LogoContainer>
+      <LogoContainer onClick={handleNavigate}>
         <h1>Shortly</h1>
         <Img src={shortly} alt="Shortly" />
       </LogoContainer>
