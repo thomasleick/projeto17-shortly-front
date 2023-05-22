@@ -17,9 +17,7 @@ const Ranking = () => {
     setIsLoading(true);
     try {
       const result = await axiosPrivate.get("/ranking", {});
-      setRanking(result.data);
-      console.log(result.data)
-      
+      setRanking(result.data);      
     } catch (error) {
       console.log(error);
       // Handle the error (e.g., show an error message)
